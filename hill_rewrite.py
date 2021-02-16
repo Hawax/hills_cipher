@@ -1,20 +1,20 @@
-import asyncio
 import os
 import re
-
 import numpy as np
-from egcd import egcd  # pip install egcd
+from egcd import egcd
 import math
-from itertools import permutations, combinations_with_replacement, combinations, product
-import array_to_latex as a2l
+from itertools import product
 from pathlib import Path
 from os import path
+
 
 class NoInverse(Exception):
     pass
 
+
 class NwdNot1(Exception):
     pass
+
 
 class HillCipher():
     def __init__(self, alphabet=None):
@@ -184,7 +184,6 @@ class HillCipher():
             return list_of_solutions
 
 
-
 def brute_force_thread(message, alphabet=None, path_='static/bruteforce'):
     files = os.listdir(path_)
     if len(files) > 50:
@@ -192,5 +191,4 @@ def brute_force_thread(message, alphabet=None, path_='static/bruteforce'):
 
     HillCipher(alphabet=alphabet).brute_force(message, path_=path_)
 
-#HillCipher().decypt_with_4_letters('osakjtgqnsrzwraqhogphiybrldvdqjyceyevvflxskqugbqrucecmioldrpmskk', 'musi')
 

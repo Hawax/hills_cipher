@@ -1,18 +1,15 @@
 import threading
-
-from flask import Flask, render_template, url_for, flash, redirect, Markup
+from flask import Flask, render_template, url_for, flash, Markup
 from forms import Szyfrowanie, Deszyfrowanie, Zgadywane, BruteForce
-import re
-import numpy as np
-from egcd import egcd  # pip install egcd
-import math
-from itertools import permutations, combinations_with_replacement, combinations, product
 import array_to_latex as a2l
 from hill_rewrite import HillCipher, brute_force_thread
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'SECRET_KEY'
 default_aplh = 'abcdefghijklmnopqrstuvwxyz'
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -24,7 +21,7 @@ def szyfrowanie():
     form = Szyfrowanie()
     if form.validate_on_submit():
         try:
-            message_fixed,encryption_matrix_mutipled, message_matrix, matrix_from_key, matrix_encrypted, encrypted_message = \
+            message_fixed, encryption_matrix_mutipled, message_matrix, matrix_from_key, matrix_encrypted, encrypted_message = \
                 HillCipher(alphabet=form.alphabet.data).encrypt(message=form.message.data, key=form.key.data)
             matrix_from_key = a2l.to_ltx(matrix_from_key, frmt='{:6}', print_out=False)
             matrix_encrypted = a2l.to_ltx(matrix_encrypted, frmt='{:6}', print_out=False)
