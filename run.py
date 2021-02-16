@@ -71,7 +71,6 @@ def znajac_pierwsze_slowo():
     if form.validate_on_submit():
 
         lista_rozwiazan = HillCipher().decypt_with_4_letters(form.encrypted.data, form.word.data)
-        print(lista_rozwiazan)
         flash(f'Wiadomość została odszyfrowana', 'success')
         return render_template('znajac_pierwsze_slowo.html', title='About', form=form, lista_rozwiazan=lista_rozwiazan)
     return render_template('znajac_pierwsze_slowo.html', title='About', form=form)
@@ -83,8 +82,6 @@ def bruteforce():
     if form.validate_on_submit():
         try:
             active_bruteforces = [thread for thread in threading.enumerate() if thread.name =="BRUTEFORCE"]
-            for thread in active_bruteforces:
-                print(thread)
             if len(active_bruteforces) <= 3:
                 threading.Thread(name='BRUTEFORCE', target=brute_force_thread, args=(form.message.data, form.alphabet.data)).start()
                 url = url_for('static', filename=f'bruteforce/{form.message.data}.txt', _external=True)
