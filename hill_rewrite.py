@@ -47,8 +47,8 @@ class HillCipher():
         print(small_matrix_enc,'\n\n\n', matrix_know_word)
         x_inv = np.linalg.solve(small_matrix_enc, matrix_know_word)
         x = np.linalg.inv(x_inv)
-        det = int(np.round(np.linalg.det(small_matrix_enc)))  # Step 1)
-        det_inv = egcd(det, len(self.alphabet))[1] % (len(self.alphabet)/divide)  # Step 2) Euklides
+        det = int(np.round(np.linalg.det(small_matrix_enc))) 
+        det_inv = egcd(det, len(self.alphabet))[1] % (len(self.alphabet)/divide) 
         matrix_modulus_inv = (
                 det_inv * np.round(det * np.linalg.inv(x)).astype(int) % len(self.alphabet)/divide)
 
@@ -78,7 +78,7 @@ class HillCipher():
     def get_inv_matrix_mod(self, matrix_key):
 
         det = int(np.round(np.linalg.det(matrix_key)))
-        det_inv = egcd(det, self.modulo)[1] % self.modulo  # Euklides
+        det_inv = egcd(det, self.modulo)[1] % self.modulo 
         matrix_modulus_inv = (
                 det_inv * np.round(det * np.linalg.inv(matrix_key)).astype(int) % self.modulo
         )
