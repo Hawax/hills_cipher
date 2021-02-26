@@ -31,7 +31,6 @@ class HillCipher():
 
     @staticmethod
     def split(string, split_len):
-        # Regex: `r'.{1}'` for example works for all characters
         regex = r'(.{%s})' % split_len
         return [x for x in re.split(regex, string) if x]
 
